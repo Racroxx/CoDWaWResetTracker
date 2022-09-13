@@ -1,5 +1,6 @@
 from time import sleep
 from ReadWriteMemory import ReadWriteMemory
+from ReadWriteMemory import ReadWriteMemoryError
 import os
 from datetime import timedelta
 art = '''▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
@@ -48,8 +49,12 @@ art = '''▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓�
 print(art)
 sleep(3)
 rwm = ReadWriteMemory()
-process = rwm.get_process_by_name("CoDWaW.exe")
-process.open()
+try:
+    process = rwm.get_process_by_name("CoDWaW.exe")
+    process.open()
+except ReadWriteMemoryError as error:
+    print("Process could not be found")
+    sleep(5)
 #get the damn pointers
 snapshots_pointer = process.get_pointer(0x0026AA55C) 
 snapshots = process.read(snapshots_pointer)

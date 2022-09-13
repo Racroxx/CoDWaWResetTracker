@@ -1,6 +1,7 @@
 from time import sleep
 import time
 from ReadWriteMemory import ReadWriteMemory
+from ReadWriteMemory import ReadWriteMemoryError
 import os
 from datetime import timedelta
 art = '''▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓
@@ -50,6 +51,13 @@ art = '''▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓�
 print(art)
 sleep(3)
 rwm = ReadWriteMemory()
+try:
+    process = rwm.get_process_by_name("CoDWaW.exe")
+    process.open()
+except ReadWriteMemoryError as error:
+    os.system("cls")
+    print("Process could not be found!")
+    sleep(5)
 process = rwm.get_process_by_name("plutonium-bootstrapper-win32.exe")
 process.open()
 #get the damn pointers
@@ -58,6 +66,7 @@ snapshots = process.read(snapshots_pointer)
 entities_pointer = process.get_pointer(0x00310DD2C)
 entities = process.read(entities_pointer)
 if snapshots == 0:
+    os.system("cls")
     print("you're not in a map right now. try again when you are.")
     sleep(3)
     exit()
