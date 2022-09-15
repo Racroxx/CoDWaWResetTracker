@@ -58,8 +58,6 @@ except ReadWriteMemoryError as error:
     os.system("cls")
     print("Process could not be found!")
     sleep(5)
-process = rwm.get_process_by_name("plutonium-bootstrapper-win32.exe")
-process.open()
 #get the damn pointers
 snapshots_pointer = process.get_pointer(0x0026AA55C) 
 snapshots = process.read(snapshots_pointer)

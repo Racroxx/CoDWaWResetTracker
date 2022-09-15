@@ -53,7 +53,8 @@ try:
     process = rwm.get_process_by_name("CoDWaW.exe")
     process.open()
 except ReadWriteMemoryError as error:
-    print("Process could not be found")
+    os.system("cls")
+    print("Process could not be found!")
     sleep(5)
 #get the damn pointers
 snapshots_pointer = process.get_pointer(0x0026AA55C) 
@@ -61,6 +62,7 @@ snapshots = process.read(snapshots_pointer)
 entities_pointer = process.get_pointer(0x00310DD2C)
 entities = process.read(entities_pointer)
 if snapshots == 0:
+    os.system("cls")
     print("you're not in a map right now. try again when you are.")
     sleep(3)
     exit()
