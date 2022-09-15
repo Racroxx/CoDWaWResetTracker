@@ -52,7 +52,7 @@ print(art)
 sleep(3)
 rwm = ReadWriteMemory()
 try:
-    process = rwm.get_process_by_name("CoDWaW.exe")
+    process = rwm.get_process_by_name("plutonium-bootstrapper-win32.exe")
     process.open()
 except ReadWriteMemoryError as error:
     os.system("cls")
